@@ -10,7 +10,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { homeOutline, analyticsOutline, settingsOutline } from 'ionicons/icons';
 import Home from './pages/Home';
 import Data from './pages/Data';
 import Settings from './pages/Settings';
@@ -56,15 +56,15 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/home">
-            <IonIcon aria-hidden="true" icon={triangle} />
+            <IonIcon aria-hidden="true" icon={homeOutline} />
             <IonLabel>Home</IonLabel>
           </IonTabButton>
           <IonTabButton tab="data" href="/data">
-            <IonIcon aria-hidden="true" icon={ellipse} />
+            <IonIcon aria-hidden="true" icon={analyticsOutline} />
             <IonLabel>Data</IonLabel>
           </IonTabButton>
           <IonTabButton tab="settings" href="/settings">
-            <IonIcon aria-hidden="true" icon={square} />
+            <IonIcon aria-hidden="true" icon={settingsOutline} />
             <IonLabel>Settings</IonLabel>
           </IonTabButton>
         </IonTabBar>
