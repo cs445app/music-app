@@ -1,5 +1,4 @@
-import { IonButton, IonContent, IonHeader, IonItem, IonGrid, IonRow, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonButton, IonContent, IonGrid, IonList, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import './Settings.css';
 
 const Settings: React.FC = () => {
@@ -7,12 +6,13 @@ const Settings: React.FC = () => {
   // This is a placeholder function for the import button
   // Should ask user to select a .csv file, then parse it and add the data to the database
   const handleImport = () => {
-    console.log('Import');
+    console.log('DEBUG: handleImport function called.');
   }
 
   // This is a placeholder function for the reset button
+  // Should ask user to confirm, then delete all data from the database
   const handleReset = () => {
-    console.log('Reset');
+    console.log('DEBUG: handleReset function called.');
   }
 
   return (
