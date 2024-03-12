@@ -5,6 +5,7 @@ import './Settings.css';
 const Settings: React.FC = () => {
 
   // This is a placeholder function for the import button
+  // Should ask user to select a .csv file, then parse it and add the data to the database
   const handleImport = () => {
     console.log('Import');
   }
@@ -35,7 +36,6 @@ const Settings: React.FC = () => {
             </IonRow>
           </IonGrid>
         </IonList>
-        <ExploreContainer name="Settings page" />
       </IonContent>
     </IonPage>
   );
