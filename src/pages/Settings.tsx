@@ -3,12 +3,6 @@ import './Settings.css';
 
 const Settings: React.FC = () => {
 
-  // This is a placeholder function for the import button
-  // Should ask user to select a .csv file, then parse it and add the data to the database
-  const handleImport = () => {
-    console.log('DEBUG: handleImport function called.');
-  }
-
   // This is a placeholder function for the reset button
   // Should ask user to confirm, then delete all data from the database
   const handleReset = () => {
@@ -31,7 +25,6 @@ const Settings: React.FC = () => {
         <IonList>
           <IonGrid>
             <IonRow>
-              <IonButton onClick={handleImport}>Import</IonButton>
               <IonButton onClick={handleReset}>Reset</IonButton>
             </IonRow>
           </IonGrid>

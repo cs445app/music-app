@@ -15,6 +15,7 @@ const Data: React.FC = () => {
             <IonTitle size="large">Data</IonTitle>
           </IonToolbar>
         </IonHeader>
+        {/* Add visual content here */}
       </IonContent>
     </IonPage>
   );
