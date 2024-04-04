@@ -1,0 +1,138 @@
+/* Home.css */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.header-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-top: 20px; /* Adjust spacing from the "header segment" section as needed */
+}
+
+
+
+.button-container {
+  margin-bottom: 20px;
+}
+
+.imported-file {
+  font-size: 18px;
+  color: white; /* imported file name */
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Set height to 100vh for full viewport height */
+  }
+  
+  .video-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .button-container {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; /* Ensure the button is above the video */
+  } 
+}
+
+.table-container {
+  overflow: auto;
+  max-width: 90%;
+  max-height: 70vh; /* Adjusted height to fit better on smaller screens */
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+
+.table-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid #dddddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.table-container th {
+  background-color: black;
+  color: #66a3ff;
+  font-weight: bold;
+  font-size: medium;
+}
+
+/* Styling for the button */
+ion-button {
+  
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; /* Reduced font size */
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px; /* Reduced border radius */
+}
+
+ion-button:hover {
+  background-color: white;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 50%; /* Make it a circle */
+  width: 150px; /* Adjust size as needed */
+  height: 150px; /* Adjust size as needed */
+  border: 2px solid #ccc; /* Small border around the logo */
+  overflow: hidden; /* Ensure image does not overflow */
+  position: relative; /* Add position relative for absolute positioning */
+}
+
+.logo-image {
+  width: auto; /* Make the image width adjust automatically */
+  height: 100%; /* Ensure the image height fills the container */
+  border-radius: 50%; /* Ensure the image stays circular */
+  position: absolute; /* Position the image absolutely */
+  top: 50%; /* Move the image 50% from the top */
+  left: 50%; /* Move the image 50% from the left */
+  transform: translate(-50%, -50%); /* Center the image */
+}
+
+
+.video-container {
+  position: fixed; /* Set position to fixed so it covers the full background */
+  width: 100%;
+  height: 100vh; /* Set height to 100vh for full viewport height */
+}
+
+.video-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.button-container {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; /* Ensure the button is above the video */
+}

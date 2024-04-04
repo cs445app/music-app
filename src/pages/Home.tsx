@@ -1,70 +1,160 @@
-import { IonButton, IonContent, IonHeader, IonItem, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React, { useState, useRef } from 'react';
-import './Home.css';
+
+
+
+import React, { useState } from 'react';
+import { IonContent,IonHeader,IonPage,IonTitle,IonToolbar,IonButton, IonFooter,} from '@ionic/react';
+import { IonLabel,IonSegment,IonSegmentButton,} from '@ionic/react'; // Add segment related imports
+import './Home.css'; // Import CSS file
+import yetiVideo from '/Users/jordanhymas/Desktop/TestRepo/music-app/src/theme/MusicApp2.mp4'; // Import video file
 
 const Home: React.FC = () => {
-  // Create a state variable to store the selected file
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  // Create a state variable to store whether a file has been selected
-  const [isFileSelected, setIsFileSelected] = useState<boolean>(false);
-  // Create a reference to the file input element, needed to trigger the file selection dialog
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [importedFileName, setImportedFileName] = useState<string>("");
+  const [csvData, setCsvData] = useState<string[][]>([]);
+  const [selectedSegment, setSelectedSegment] = useState<string>('all'); // State to manage segment selection
+  const [videoEnded, setVideoEnded] = useState<boolean>(false); // State to track video playing state
 
-  // Handle the file input change event, which is triggered when the user selects a file
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('DEBUG: handleFileChange function called.');
-    const file = event.target.files ? event.target.files[0] : null;
-    setSelectedFile(file);
-    setIsFileSelected(file ? true : false);
+  const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Handle file input change event
+    const file = event.target.files?.[0];
+    if (file) {
+      setImportedFileName(file.name);
+      
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        if (e.target) {
+          const contents = e.target.result as string;
+          const lines = contents.split('\n');
+          const parsedData: string[][] = [];
+
+          lines.forEach(line => {
+            const row: string[] = [];
+            let value = '';
+            let withinQuotes = false;
+
+            for (let i = 0; i < line.length; i++) {
+              const char = line[i];
+
+              if (char === '"') {
+                withinQuotes = !withinQuotes;
+              } else if (char === ',' && !withinQuotes) {
+                row.push(value.trim());
+                value = '';
+              } else {
+                value += char;
+              }
+            }
+
+            row.push(value.trim());
+
+            parsedData.push(row);
+          });
+
+          setCsvData(parsedData);
+          setSelectedSegment('favorites'); // Switch to favorites segment after importing CSV
+        }
+      };
+
+      reader.readAsText(file);
+    }
   };
 
-  // Handle the import button click event, which is triggered when the user clicks the import button
-  const handleImportClick = () => {
-    console.log('DEBUG: handleImportClick function called.');
-    fileInputRef.current?.click();
+  const handleImportButtonClick = () => {
+    // Handle import button click eventf
+    const fileInput = document.getElementById('fileInput');
+    if (fileInput) {
+      fileInput.click();
+    }
   };
 
-  // Handle the convert button click event, which is triggered when the user clicks the convert button
-  const handleConvertClick = () => {
-    // Logic to convert the CSV file to a SQL database goes here
-    console.log('DEBUG: handleConvertClick function called.');
+  const handleVideoEnded = () => {
+    // Handle video ended event
+    setVideoEnded(true);
   };
 
   return (
     <IonPage>
-      <IonHeader translucent={true}>
+      <IonHeader>
+        {/* Segment for filtering */}
         <IonToolbar>
-          <IonTitle>Home</IonTitle>
+          <div className="header-container">
+          <IonSegment value={selectedSegment} onIonChange={e => setSelectedSegment(e.detail.value as string)}>
+            <IonSegmentButton value="all" style={{ height: ".5px" }}> {/* Shorter segment buttons */}
+              <IonLabel>Import</IonLabel>
+            </IonSegmentButton>
+            <IonSegmentButton value="favorites" style={{ height: ".5px" }}> {/* Shorter segment buttons */}
+              <IonLabel>Table View</IonLabel>
+            </IonSegmentButton>
+          </IonSegment>
+          </div>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen={true} className="ion-padding">
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Home</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonItem>
-          <IonButton onClick={handleImportClick} style={{ width: '100%' }}>
-            Import CSV
-          </IonButton>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".csv"
-            onChange={handleFileChange}
-            style={{ display: 'none' }} // Hide the default file input element
-          />
-        </IonItem>
-        {isFileSelected && (
-          <IonItem>
-            <IonButton onClick={handleConvertClick} style={{ width: '100%' }}>
-              Convert to SQL
-            </IonButton>
-          </IonItem>
-        )}
+        <div className="home-container">
+          {/* Video Section */}
+          {!videoEnded && selectedSegment === 'all' && (
+            <div className="video-container">
+              <video
+                autoPlay
+                muted
+                loop
+                className="video-element"
+                onEnded={handleVideoEnded}
+              >
+                <source src={yetiVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          )}
+          
+          {/* Display CSV data in "Favorites" segment */}
+          {selectedSegment === 'favorites' && csvData.length > 0 && (
+            <div className="table-container" style={{ marginBottom: "10px" }}> {/* Adding margin bottom */}
+              <table style={{ fontSize: "12px" }}> {/* Adjusting font size for smaller screens */}
+                <thead>
+                  <tr>
+                    {csvData[0].map((header, index) => (
+                      <th key={index}>{header}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {csvData.slice(1).map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {row.map((cell, cellIndex) => (
+                        <td key={cellIndex}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Button to trigger file input click */}
+          {selectedSegment === 'all' && (
+            <div className="button-container">
+              <IonButton onClick={handleImportButtonClick}>Import CSV</IonButton>
+            </div>
+          )}
+          {importedFileName && (
+            <div className="imported-file">
+              Imported File: {importedFileName}
+            </div>
+          )}
+        </div>
       </IonContent>
+      {/* File input element */}
+      <input
+        type="file"
+        id="fileInput"
+        accept=".csv, .mp4"
+        onChange={handleFileInputChange}
+        style={{ display: 'none' }}
+      />
     </IonPage>
   );
 };
 
 export default Home;
+

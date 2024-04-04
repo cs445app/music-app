@@ -1,37 +1,79 @@
-import { IonButton, IonContent, IonGrid, IonList, IonHeader, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import './Settings.css';
+import React from 'react';
+import { IonItem, IonLabel, IonList, IonPage, IonReorder, IonReorderGroup, ItemReorderEventDetail,IonInput, IonContent, IonCard } from '@ionic/react';
+import { IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from '@ionic/react';
+import CsvLogo from '/Users/jordanhymas/Desktop/TestRepo/music-app/src/theme/musicAppLogo copy.png';
 
-const Settings: React.FC = () => {
+function Example() {
+  function handleReorder(event: CustomEvent<ItemReorderEventDetail>) {
+    // The `from` and `to` properties contain the index of the item
+    // when the drag started and ended, respectively
+    console.log('Dragged from index', event.detail.from, 'to', event.detail.to);
 
-  // This is a placeholder function for the reset button
-  // Should ask user to confirm, then delete all data from the database
-  const handleReset = () => {
-    console.log('DEBUG: handleReset function called.');
+    // Finish the reorder and position the item in the DOM based on
+    // where the gesture ended. This method can also be called directly
+    // by the reorder group
+    event.detail.complete();
   }
+  
 
   return (
     <IonPage>
-      <IonHeader translucent={true}>
-        <IonToolbar>
-          <IonTitle>Settings</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen={true} className="ion-padding">
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Settings</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonList>
-          <IonGrid>
-            <IonRow>
-              <IonButton onClick={handleReset}>Reset</IonButton>
-            </IonRow>
-          </IonGrid>
-        </IonList>
+      <IonContent scrollY={true}>
+        <br></br>
+        <br></br>
+      <IonCard>
+          <IonCardHeader>
+              <IonCardTitle>Card Title</IonCardTitle>
+              <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+          </IonCardHeader>
+          <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
+        </IonCard>
+      <IonList>
+        <IonReorderGroup disabled={false} onIonItemReorder={handleReorder}>
+          <IonItem>
+            <IonLabel> <IonInput label="Type something"
+              labelPlacement="stacked"
+              clearOnEdit={true}
+              placeholder="Enter Artist Name" value={localStorage.getItem('artistName1')} onIonChange={(e) => localStorage.setItem('artistName1', e.detail.value!)}></IonInput></IonLabel>
+            <IonReorder slot="end"></IonReorder>
+          </IonItem>
+
+          <IonItem>
+            <IonLabel> <IonInput label="Type something"
+              labelPlacement="stacked"
+              clearOnEdit={true}
+              placeholder="Enter Artist Name" value={localStorage.getItem('artistName2')} onIonChange={(e) => localStorage.setItem('artistName2', e.detail.value!)}></IonInput></IonLabel>
+            <IonReorder slot="end"></IonReorder>
+          </IonItem>
+
+          <IonItem>
+            <IonLabel> <IonInput label="Type something"
+              labelPlacement="stacked"
+              clearOnEdit={true}
+              placeholder="Enter Artist Name" value={localStorage.getItem('artistName3')} onIonChange={(e) => localStorage.setItem('artistName3', e.detail.value!)}></IonInput></IonLabel>
+            <IonReorder slot="end"></IonReorder>
+          </IonItem>
+
+          <IonItem>
+            <IonLabel><IonInput label="Type something"
+              labelPlacement="stacked"
+              clearOnEdit={true}
+              placeholder="Enter Artist Name" value={localStorage.getItem('artistName4')} onIonChange={(e) => localStorage.setItem('artistName4', e.detail.value!)}></IonInput></IonLabel>
+            <IonReorder slot="end"></IonReorder>
+          </IonItem>
+
+          <IonItem>
+            <IonLabel><IonInput label="Type something"
+              labelPlacement="stacked"
+              clearOnEdit={true}
+              placeholder="Enter Artist Name" value={localStorage.getItem('artistName5')} onIonChange={(e) => localStorage.setItem('artistName5', e.detail.value!)}></IonInput></IonLabel>
+            <IonReorder slot="end"></IonReorder>
+          </IonItem>
+        </IonReorderGroup>
+      </IonList>
+
       </IonContent>
     </IonPage>
   );
-};
-
-export default Settings;
+}
+export default Example;
