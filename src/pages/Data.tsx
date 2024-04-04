@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle } from '@ionic/react';
 import './Data.css';
-import CsvLogo from '/Users/jordanhymas/Desktop/TestRepo/music-app/src/theme/musicAppLogo copy.png';
-import emptyBackground from '/Users/jordanhymas/Desktop/TestRepo/music-app/src/theme/emptyBackground.mp4';
+import CsvLogo from '/src/theme/musicAppLogo copy.png';
+
 
 const Data: React.FC = () => {
   return (

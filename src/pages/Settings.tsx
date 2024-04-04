@@ -1,7 +1,7 @@
 import React from 'react';
 import { IonItem, IonLabel, IonList, IonPage, IonReorder, IonReorderGroup, ItemReorderEventDetail,IonInput, IonContent, IonCard } from '@ionic/react';
 import { IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent } from '@ionic/react';
-import CsvLogo from '/Users/jordanhymas/Desktop/TestRepo/music-app/src/theme/musicAppLogo copy.png';
+
 
 function Example() {
   function handleReorder(event: CustomEvent<ItemReorderEventDetail>) {

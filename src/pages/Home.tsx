@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { IonContent,IonHeader,IonPage,IonTitle,IonToolbar,IonButton, IonFooter,} from '@ionic/react';
 import { IonLabel,IonSegment,IonSegmentButton,} from '@ionic/react'; // Add segment related imports
 import './Home.css'; // Import CSS file
-import yetiVideo from '/Users/jordanhymas/Desktop/TestRepo/music-app/src/theme/MusicApp2.mp4'; // Import video file
+import yetiVideo from '/src/theme/MusicApp2.mp4'; // Import video file
 
 const Home: React.FC = () => {
   const [importedFileName, setImportedFileName] = useState<string>("");
